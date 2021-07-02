@@ -17,7 +17,7 @@ const resultsMerge = merge(countryShapes, countryNames, { on: 'iso_a3' })
 const mergeSjoin = sjoin(citiesPoints, countryShapes)
 ```
 
-Working examples, and an in-depth explanation of the two functions can be found in the [user guide notebook](https://observablehq.com/d/4dcd61f046e8fe60).
+Working examples, and an in-depth explanation of the two functions can be found in the [user guide notebook](https://observablehq.com/@chrispahm/hello-spatialmerge).
 
 ## Installing
 ```shell
@@ -46,7 +46,7 @@ For legacy environments, you can load `spatialmerge`’s UMD bundle from an npm-
 ## User Guide
 
 The User Guide is hosted as an interactive ObservableHQ notebook  
-https://observablehq.com/d/4dcd61f046e8fe60
+https://observablehq.com/@chrispahm/hello-spatialmerge
 
 ## API reference
 
@@ -67,7 +67,7 @@ Parameters:
 ##### spatialmerge.sjoin(*leftFC, rightFC[, options = { how: 'inner', op: 'intersects', matches: 'all', lsuffix: 'left', rsuffix: 'right' }]*)
 
 Spatial join of two GeoJSON FeatureCollections.  
-See the [User Guide](https://observablehq.com/d/4dcd61f046e8fe60) for details.
+See the [User Guide](https://observablehq.com/@chrispahm/hello-spatialmerge) for details.
 
 Parameters:
 - **leftFC, rightFC**: *[\<GeoJSON FeatureCollection\>](https://macwright.com/2015/03/23/geojson-second-bite.html#featurecollection), required*
