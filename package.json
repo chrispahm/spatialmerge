@@ -1,0 +1,62 @@
+{
+  "name": "spatialmerge",
+  "version": "1.0.0",
+  "description": "Merging geospatial data in JS",
+  "type": "module",
+  "main": "./dist/spatialmerge.cjs.js",
+  "exports": {
+    "umd": "./dist/spatialmerge.min.js",
+    "require": "./dist/spatialmerge.cjs.js",
+    "default": "./dist/spatialmerge.esm.js"
+  },
+  "module": "./dist/spatialmerge.esm.js",
+  "browser": "./dist/spatialmerge.min.js",
+  "files": [
+    "dist/*.js",
+    "src/*.js"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "keywords": [
+    "geospatial",
+    "spatial",
+    "turf.js",
+    "geopandas",
+    "merge",
+    "spatialmerge",
+    "attributejoin",
+    "join"
+  ],
+  "author": "Christoph Pahmeyer <christoph.pahmeyer@uni-bonn.de>",
+  "license": "MIT",
+  "dependencies": {
+    "@turf/bbox": "^6.4.0",
+    "@turf/boolean-contains": "^6.4.0",
+    "@turf/boolean-crosses": "^6.4.0",
+    "@turf/boolean-intersects": "^6.4.0",
+    "@turf/boolean-overlap": "^6.4.0",
+    "@turf/boolean-within": "^6.4.0",
+    "@turf/clone": "^6.4.0",
+    "@turf/helpers": "^6.4.0",
+    "@turf/meta": "^6.4.0",
+    "flatbush": "^3.3.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@turf/tag": "^6.4.0",
+    "d3-dsv": "^3.0.1",
+    "eslint": "^7.29.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "geojson-stream": "^0.1.0",
+    "rollup": "^2.52.2",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}

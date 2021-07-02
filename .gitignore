@@ -1,0 +1,8 @@
+node_modules
+package-lock.json
+dist
+
+merged_plots_geopandas.json
+merged_plots.json
+sqrs.json
+single_plot_population_bbox.json
