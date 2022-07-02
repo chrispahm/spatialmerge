@@ -21,7 +21,7 @@ function mergeWith (object1, object2, lsuffix, rsuffix) {
       if (duplicates.indexOf(key) > -1) {
         feature[key + '_' + rsuffix] = object2[key]
       } else {
-        feature[key] = object1[key]
+        feature[key] = object2[key]
       }
     })
     return feature
