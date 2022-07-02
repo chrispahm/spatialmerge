@@ -32,7 +32,7 @@ const readFile = util.promisify(fs.readFile)
   // expected output data
   const mergeExpected = require('./output/merged.json')
   const citiesExpected = require('./output/merged_cities.json')
-  const plotsExpected = await reader('./test/output/merged_plots.json')
+  // const plotsExpected = await reader('./test/output/merged_plots.json')
 
   console.log('Start merge function tests...')
   // test attribute merge function
