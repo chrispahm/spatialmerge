@@ -2,6 +2,7 @@ import fs from 'fs'
 import util from 'util'
 import { csvParse } from 'd3-dsv'
 import sm from '../src/index.js'
+import { findAllDuplicates } from '../src/helpers.js'
 import { createRequire } from 'module'
 import { strictEqual, deepStrictEqual } from 'assert'
 import reader from './utilities/reader.js'
@@ -117,6 +118,24 @@ const readFile = util.promisify(fs.readFile)
   }
 
   console.log('Passed all merge function tests!')
+
+  // Unit tests for findAllDuplicates
+  const allDistinct = [1, 2, 3, 4, 5, 6]
+  try {
+    deepStrictEqual(findAllDuplicates(allDistinct), [])
+  } catch (e) {
+    console.error('Unexpected output in findAllDuplicates function (allDistinct case)', e)
+    process.exit()
+  }
+  const withDuplicates = [1, 2, 1, 3, 4, 5, 6, 3]
+  try {
+    deepStrictEqual(findAllDuplicates(withDuplicates),[1, 3])
+  } catch (e) {
+    console.error('Unexpected output in findAllDuplicates function (withDuplicates case)', e)
+    process.exit()
+  }
+
+  console.log('Passed all findAllDuplicates tests!')
 
   // Assert sjoin function
   // TODO: Add tests for function inputs and error handling
