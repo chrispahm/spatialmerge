@@ -1,4 +1,4 @@
-function mergeWith (object1, object2, lsuffix, rsuffix) {
+function mergeWith(object1, object2, lsuffix = 'left', rsuffix = 'right') {
   const keys1 = Object.keys(object1)
   const keys2 = Object.keys(object2)
   const allKeys = [...keys1, ...keys2]
