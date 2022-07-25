@@ -20,7 +20,10 @@ function merge (geojson1, geojsonOrDataFrame, options = {}) {
     try {
       geojson1 = clone(geojson1)
     } catch (e) {
-      throw new Error('Cloning input GeoJSON failed. Check for missing/empty geometries in the feature collection. Original @turf/clone error message:', e)
+      // @turf/clone probably failed due to 
+      // https://github.com/Turfjs/turf/issues/2314
+      // falling back to JSON.stringify / parse
+      geojson1 = JSON.parse(JSON.stringify(geojson1))
     }
   }
 
