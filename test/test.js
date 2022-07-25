@@ -128,7 +128,6 @@ const sortBy = (fn) => {
   const joinedCities = sm.sjoin(cities, countriesGeometries)
   // sort by city id to simplify comparison to GeoPandas
   joinedCities.features.sort(sortBy(f => f.properties.id))
-  await writeFile('./sjoin_test.json', JSON.stringify(joinedCities),'utf8')
   
   try {
     deepStrictEqual(joinedCities.features, citiesExpected.features)
