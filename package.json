@@ -1,6 +1,6 @@
 {
   "name": "spatialmerge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Merging geospatial data in JS",
   "type": "module",
   "main": "./dist/spatialmerge.cjs.js",
