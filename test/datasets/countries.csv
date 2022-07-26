@@ -11,7 +11,6 @@ Argentina,ARG,AR
 Armenia,ARM,AM
 American Samoa,ASM,AS
 Antarctica,ATA,AQ
-Ashmore and Cartier Islands,-99,AQ
 French Southern and Antarctic Lands,ATF,TF
 Antigua and Barbuda,ATG,AG
 Australia,AUS,AU
@@ -26,7 +25,6 @@ Bulgaria,BGR,BG
 Bahrain,BHR,BH
 The Bahamas,BHS,BS
 Bosnia and Herzegovina,BIH,BA
-Bajo Nuevo Bank (Petrel Is.),-99,UM
 Saint Barthelemy,BLM,BL
 Belarus,BLR,BY
 Belize,BLZ,BZ
@@ -43,9 +41,7 @@ Switzerland,CHE,CH
 Chile,CHL,CL
 China,CHN,CN
 Ivory Coast,CIV,CI
-Clipperton Island,-99,-
 Cameroon,CMR,CM
-Cyprus No Mans Area,-99,-
 Democratic Republic of the Congo,COD,CD
 Republic of Congo,COG,CG
 Cook Islands,COK,CK
@@ -53,11 +49,9 @@ Colombia,COL,CO
 Comoros,COM,KM
 Cape Verde,CPV,CV
 Costa Rica,CRI,CR
-Coral Sea Islands,-99,-
 Cuba,CUB,CU
 Curaçao,CUW,CW
 Cayman Islands,CYM,KY
-Northern Cyprus,-99,-
 Cyprus,CYP,CY
 Czech Republic,CZE,CZ
 Germany,DEU,DE
@@ -69,7 +63,6 @@ Algeria,DZA,DZ
 Ecuador,ECU,EC
 Egypt,EGY,EG
 Eritrea,ERI,ER
-Dhekelia Sovereign Base Area,-99,-
 Spain,ESP,ES
 Estonia,EST,EE
 Ethiopia,ETH,ET
@@ -104,7 +97,6 @@ Hungary,HUN,HU
 Indonesia,IDN,ID
 Isle of Man,IMN,IM
 India,IND,IN
-Indian Ocean Territories,-99,-
 British Indian Ocean Territory,IOT,IO
 Ireland,IRL,IE
 Iran,IRN,IR
@@ -116,8 +108,6 @@ Jamaica,JAM,JM
 Jersey,JEY,JE
 Jordan,JOR,JO
 Japan,JPN,JP
-Baykonur Cosmodrome,-99,-
-Siachen Glacier,-99,-
 Kazakhstan,KAZ,KZ
 Kenya,KEN,KE
 Kyrgyzstan,KGZ,KG
@@ -125,7 +115,6 @@ Cambodia,KHM,KH
 Kiribati,KIR,KI
 Saint Kitts and Nevis,KNA,KN
 South Korea,KOR,KR
-Kosovo,-99,-
 Kuwait,KWT,KW
 Laos,LAO,LA
 Lebanon,LBN,LB
@@ -177,7 +166,6 @@ Pakistan,PAK,PK
 Panama,PAN,PA
 Pitcairn Islands,PCN,PN
 Peru,PER,PE
-Spratly Islands,-99,-
 Philippines,PHL,PH
 Palau,PLW,PW
 Papua New Guinea,PNG,PG
@@ -194,11 +182,9 @@ Russia,RUS,RU
 Rwanda,RWA,RW
 Western Sahara,ESH,EH
 Saudi Arabia,SAU,SA
-Scarborough Reef,-99,-
 Sudan,SDN,SD
 South Sudan,SSD,SS
 Senegal,SEN,SN
-Serranilla Bank,-99,-
 Singapore,SGP,SG
 South Georgia and South Sandwich Islands,SGS,GS
 Saint Helena,SHN,SH
@@ -206,7 +192,6 @@ Solomon Islands,SLB,SB
 Sierra Leone,SLE,SL
 El Salvador,SLV,SV
 San Marino,SMR,SM
-Somaliland,-99,-
 Somalia,SOM,SO
 Saint Pierre and Miquelon,SPM,PM
 Republic of Serbia,SRB,RS
@@ -238,7 +223,6 @@ Ukraine,UKR,UA
 United States Minor Outlying Islands,UMI,UM
 Uruguay,URY,UY
 United States of America,USA,US
-US Naval Base Guantanamo Bay,-99,-
 Uzbekistan,UZB,UZ
 Vatican,VAT,VA
 Saint Vincent and the Grenadines,VCT,VC
@@ -248,7 +232,6 @@ United States Virgin Islands,VIR,VI
 Vietnam,VNM,VN
 Vanuatu,VUT,VU
 Wallis and Futuna,WLF,WF
-Akrotiri Sovereign Base Area,-99,-
 Samoa,WSM,WS
 Yemen,YEM,YE
 South Africa,ZAF,ZA

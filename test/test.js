@@ -2,12 +2,17 @@ import fs from 'fs'
 import util from 'util'
 import { csvParse } from 'd3-dsv'
 import sm from '../src/index.js'
+import { findAllDuplicates } from '../src/helpers.js'
 import { createRequire } from 'module'
 import { strictEqual, deepStrictEqual } from 'assert'
 import reader from './utilities/reader.js'
 const require = createRequire(import.meta.url)
 const readFile = util.promisify(fs.readFile)
-// const writeFile = util.promisify(fs.writeFile)
+const writeFile = util.promisify(fs.writeFile)
+
+const sortBy = (fn) => {
+  return (a, b) => (fn(a) > fn(b)) ? 1 : ((fn(b) > fn(a)) ? -1 : 0);
+}
 
 ;(async () => {
   console.log('Reading test data...')
@@ -17,23 +22,11 @@ const readFile = util.promisify(fs.readFile)
 
   const cities = require('./geometries/cities.json')
   const countriesGeometries = require('./geometries/countries.json')
-  const countriesGeometriesFull = require('./geometries/countries_full.json')
-
-  // filter cities/countries with missing geometries
-  cities.features = cities.features.filter(c => c.geometry)
-  countriesGeometries.features = countriesGeometries.features.filter(c => c.geometry)
-  countriesGeometriesFull.features = countriesGeometriesFull.features.filter(c => c.geometry)
-
-  // TODO: These test are currently disabled due to the max. file size limit
-  // imposed by GitHub -> Use git-lfs
-  // const sqrs = require('./geometries/sqrs_bbox.json')
-  // const plots = require('./geometries/single_plot_population_bbox.json')
-
-  // expected output data
-  const mergeExpected = require('./output/merged.json')
-  const citiesExpected = require('./output/merged_cities.json')
-  const plotsExpected = await reader('./test/output/merged_plots.json')
-
+      
+  // expected output data - created using GeoPandas
+  const mergeExpected = require('./output/merged_countries_geopandas.json')
+  const citiesExpected = require('./output/merged_cities_geopandas.json')
+  
   console.log('Start merge function tests...')
   // test attribute merge function
   // assert input errors
@@ -72,12 +65,12 @@ const readFile = util.promisify(fs.readFile)
   } catch (e) {
     strictEqual(e.message, '<mutate> must be a boolean')
   }
-
+  
   // assert merge function, geojson <-> dataframe, without mutating input
   const merged = sm.merge(countriesGeometries, countriesData, { on: 'ISO_A3' })
 
   try {
-    deepStrictEqual(merged, mergeExpected)
+    deepStrictEqual(merged.features, mergeExpected.features)
   } catch (e) {
     console.error('Unexpected output in merge function', e)
     process.exit()
@@ -85,15 +78,6 @@ const readFile = util.promisify(fs.readFile)
   // check if input got mutated
   if (countriesGeometries.features[0].properties.ISO_A2) {
     console.error('Merge function input got mutated unexpectedly!')
-    process.exit()
-  }
-  // assert merge function, geojson <-> geojson, without mutating input
-  const mergedGeometries = sm.merge(countriesGeometries, countriesGeometriesFull, { on: 'ISO_A3' })
-
-  try {
-    deepStrictEqual(mergedGeometries, mergeExpected)
-  } catch (e) {
-    console.error('Unexpected output in merge function (mergin two geometries)', e)
     process.exit()
   }
 
@@ -103,39 +87,70 @@ const readFile = util.promisify(fs.readFile)
     process.exit()
   }
   // check mutation option
-  const mergedMutate = sm.merge(countriesGeometries, countriesData, { on: 'ISO_A3', mutate: true })
+  // create a deep clone of the countriesGeometries object 
+  const clonedCountriesGeometries = JSON.parse(JSON.stringify(countriesGeometries))
+  const mergedMutate = sm.merge(clonedCountriesGeometries, countriesData, { on: 'ISO_A3', mutate: true })
   try {
-    deepStrictEqual(mergedMutate, mergeExpected)
+    deepStrictEqual(mergedMutate.features, mergeExpected.features)
   } catch (e) {
     console.error('Unexpected output in merge function', e)
     process.exit()
   }
+  
   // check if input got mutated
-  if (!countriesGeometries.features[0].properties.ISO_A2) {
+  if (!clonedCountriesGeometries.features[0].properties.ISO_A2) {
     console.error('Merge function did not get mutated!')
     process.exit()
   }
+  
 
   console.log('Passed all merge function tests!')
 
-  // Assert sjoin function
-  // TODO: Add tests for function inputs and error handling
-  /* // TODO: fix using git-lfs
-  const joinedPlots = sm.sjoin(plots, sqrs)
+  // Unit tests for findAllDuplicates
+  const allDistinct = [1, 2, 3, 4, 5, 6]
   try {
-    deepStrictEqual(joinedPlots, plotsExpected)
+    deepStrictEqual(findAllDuplicates(allDistinct), [])
   } catch (e) {
-    console.error('Unexpected output in sjoin function', e)
+    console.error('Unexpected output in findAllDuplicates function (allDistinct case)', e)
     process.exit()
   }
-  */
-  const joinedCities = sm.sjoin(cities, countriesGeometries)
+  const withDuplicates = [1, 2, 1, 3, 4, 5, 6, 3]
   try {
-    deepStrictEqual(joinedCities, citiesExpected)
+    deepStrictEqual(findAllDuplicates(withDuplicates),[1, 3])
   } catch (e) {
-    console.error('Unexpected output in sjoin function', e)
+    console.error('Unexpected output in findAllDuplicates function (withDuplicates case)', e)
     process.exit()
   }
 
+  console.log('Passed all findAllDuplicates tests!')
+  
+  // sjoin tests
+  const joinedCities = sm.sjoin(cities, countriesGeometries)
+  // sort by city id to simplify comparison to GeoPandas
+  joinedCities.features.sort(sortBy(f => f.properties.id))
+  
+  try {
+    deepStrictEqual(joinedCities.features, citiesExpected.features)
+  } catch (e) {
+    console.error('Unexpected output in sjoin function', e)
+    process.exit()
+  }
+  
+  // Issue #3 - neighborhoods <-> public restrooms
+  const neighborhoods = require('./geometries/neighborhoods.json');
+  const restrooms = require('./geometries/Parks_Public_Restrooms.json');
+  const joinedNeighborhoods = sm.sjoin(restrooms, neighborhoods, { how: "inner", op: "intersects" });
+  // sort by OBJECTID_left to simplify comparison to GeoPandas
+  joinedNeighborhoods.features.sort(sortBy(f => f.properties.OBJECTID_left))
+
+  const joinedNeighborhoodsExpected = require('./output/merged_neighborhoods_geopandas.json');
+  
+  try {
+    deepStrictEqual(joinedNeighborhoods.features, joinedNeighborhoodsExpected.features)
+  } catch (e) {
+    console.error('Unexpected output in sjoin function', e)
+    process.exit()
+  }
+  
   console.log('Passed all spatial join (sjoin) tests!')
 })()
