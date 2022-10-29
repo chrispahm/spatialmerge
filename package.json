@@ -3,10 +3,10 @@
   "version": "1.0.1",
   "description": "Merging geospatial data in JS",
   "type": "module",
-  "main": "./dist/spatialmerge.cjs.js",
+  "main": "./dist/spatialmerge.cjs",
   "exports": {
     "umd": "./dist/spatialmerge.min.js",
-    "require": "./dist/spatialmerge.cjs.js",
+    "require": "./dist/spatialmerge.cjs",
     "default": "./dist/spatialmerge.esm.js"
   },
   "module": "./dist/spatialmerge.esm.js",
